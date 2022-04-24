@@ -1,0 +1,56 @@
+{ 
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  
+    "type": "object",
+      "properties": {
+        "Example id":{
+            "type":"number"
+        }, 
+        "name": {
+            "type": "string"
+        },
+        "home phone":{
+            "type": "number"
+        },
+        "cell phone":{
+            "type": "number"
+        },
+        "work phone":{
+            "type" : "number"
+        },
+        "birth":{
+            "type": "string"
+        },
+        "govt id" :{
+            "type": "number"
+        },
+         "day": {
+             
+                 "type": "string",
+                 "enum": ["SU", "MO", "TU", "WE","TH","FR","SA"]  
+             
+         }
+
+        
+    },
+    "required": [ "Example id", "name","da"],
+
+    "anyOf": [
+        {"required": ["home phone"]},
+        {"required": ["cell phone"]},
+        {"required": ["work phone"]}
+    ],
+    "allOf": [
+  {
+    "if": { "required": ["birth"] },
+    "then": { "not": { "required": ["govt id"] } }
+  },
+  {
+    "if": { "required": ["govt id"] },
+    "then": { "not": { "required": ["birth"] } }
+  }
+]
+
+
+       
+}
